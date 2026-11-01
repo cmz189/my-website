@@ -30,9 +30,20 @@
     <div class="hint">登录仅限指定手机号 · 其他号码可以打开页面，但无法注册</div>
   </div>
   <script>
-    var target = "https://madonna-veterinary-engagement-journalism.trycloudflare.com";
-    document.getElementById('go').href = target;
-    setTimeout(function () { try { location.replace(target); } catch (e) {} }, 700);
+    var baked = "https://madonna-veterinary-engagement-journalism.trycloudflare.com";
+    function go(u) { try { location.replace(u); } catch (e) {} }
+    document.getElementById('go').href = baked;
+    // 优先拉取最新地址（隧道重启后几秒内就能更新，不用等 Pages 重新构建）
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); go(baked); }, 4500);
+    fetch('https://raw.githubusercontent.com/cmz189/my-website/gh-pages/h3/target.txt?t=' + Date.now(), { cache: 'no-store', signal: ctrl.signal })
+      .then(function (r) { return r.ok ? r.text() : ''; })
+      .then(function (txt) {
+        clearTimeout(timer);
+        var u = String(txt || '').trim();
+        if (/^https://[a-z0-9-]+.trycloudflare.com$/i.test(u)) go(u); else go(baked);
+      })
+      .catch(function () { clearTimeout(timer); go(baked); });
     setTimeout(function () {
       document.getElementById('tip').textContent = '跳转较慢：可能是电脑刚开机、隧道还在恢复，请点按钮重试。';
     }, 3800);
@@ -40,4 +51,4 @@
   <noscript><a href="https://madonna-veterinary-engagement-journalism.trycloudflare.com">进入工作台</a></noscript>
 </body>
 </html>
-<!-- target: https://madonna-veterinary-engagement-journalism.trycloudflare.com | updated: 2026-11-01T09:53:05.837Z -->
+<!-- target: https://madonna-veterinary-engagement-journalism.trycloudflare.com | updated: 2026-11-01T09:54:37.396Z -->
