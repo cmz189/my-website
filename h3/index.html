@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>光幕 LUMEN · 正在进入</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+    background:radial-gradient(800px 460px at 20% 10%,rgba(217,179,106,.12),transparent 60%),
+      radial-gradient(700px 460px at 82% 20%,rgba(103,232,249,.08),transparent 62%),#06070b;
+    color:#f8fafc;font-family:"Inter","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif}
+  .box{max-width:420px;text-align:center}
+  .logo{font-size:15px;letter-spacing:.3em;color:#d9b36a;margin-bottom:18px}
+  h1{font-size:22px;font-weight:800;letter-spacing:.04em;margin-bottom:12px}
+  p{font-size:13px;line-height:1.8;color:#8b94a3}
+  a.btn{display:inline-block;margin-top:22px;padding:12px 22px;border-radius:12px;
+    background:linear-gradient(180deg,#f0d9a4,#d9b36a);color:#1b1608;text-decoration:none;
+    font-weight:700;font-size:14px}
+  .hint{margin-top:16px;font-size:11.5px;color:#5f6875;line-height:1.7}
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="logo">光幕 LUMEN ATELIER</div>
+    <h1>正在进入工作台…</h1>
+    <p id="tip">如果 3 秒内没有自动跳转，点下面的按钮。</p>
+    <a class="btn" id="go" href="#">进入工作台</a>
+    <div class="hint">登录仅限指定手机号 · 其他号码可以打开页面，但无法注册</div>
+  </div>
+  <script>
+    var target = "https://madonna-veterinary-engagement-journalism.trycloudflare.com";
+    document.getElementById('go').href = target;
+    setTimeout(function () { try { location.replace(target); } catch (e) {} }, 700);
+    setTimeout(function () {
+      document.getElementById('tip').textContent = '跳转较慢：可能是电脑刚开机、隧道还在恢复，请点按钮重试。';
+    }, 3800);
+  </script>
+  <noscript><a href="https://madonna-veterinary-engagement-journalism.trycloudflare.com">进入工作台</a></noscript>
+</body>
+</html>
+<!-- target: https://madonna-veterinary-engagement-journalism.trycloudflare.com | updated: 2026-11-01T09:53:05.837Z -->
