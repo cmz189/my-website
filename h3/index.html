@@ -35,13 +35,13 @@
     document.getElementById('go').href = baked;
     // 优先拉取最新地址（隧道重启后几秒内就能更新，不用等 Pages 重新构建）
     var ctrl = new AbortController();
-    var timer = setTimeout(function () { ctrl.abort(); go(baked); }, 4500);
+    var timer = setTimeout(function () { ctrl.abort(); go(baked); }, 3500);
     fetch('https://raw.githubusercontent.com/cmz189/my-website/gh-pages/h3/target.txt?t=' + Date.now(), { cache: 'no-store', signal: ctrl.signal })
       .then(function (r) { return r.ok ? r.text() : ''; })
       .then(function (txt) {
         clearTimeout(timer);
         var u = String(txt || '').trim();
-        if (/^https://[a-z0-9-]+.trycloudflare.com$/i.test(u)) go(u); else go(baked);
+        if (u.indexOf('https://') === 0 && u.indexOf('.trycloudflare.com') > -1) go(u); else go(baked);
       })
       .catch(function () { clearTimeout(timer); go(baked); });
     setTimeout(function () {
@@ -51,4 +51,4 @@
   <noscript><a href="https://madonna-veterinary-engagement-journalism.trycloudflare.com">进入工作台</a></noscript>
 </body>
 </html>
-<!-- target: https://madonna-veterinary-engagement-journalism.trycloudflare.com | updated: 2026-11-01T09:54:37.396Z -->
+<!-- target: https://madonna-veterinary-engagement-journalism.trycloudflare.com | updated: 2026-11-01T09:59:01.766Z -->
