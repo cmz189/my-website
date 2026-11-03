@@ -4,70 +4,123 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow" />
-<title>光幕 LUMEN · 正在进入</title>
+<meta name="description" content="光幕 LUMEN ATELIER：提示词工坊、视频生成、对标拆解，合在一个短视频创作小工作台里。" />
+<title>光幕 LUMEN ATELIER · 短视频创作小工作台</title>
 <style>
+  :root{--gold:#e8c583;--gold2:#c99a4e;--cyan:#67e8f9;--ink:#06070b;--line:rgba(186,194,220,.16);--dim:#8b95a8;--text:#f4efe5}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
-    background:radial-gradient(800px 460px at 20% 10%,rgba(217,179,106,.12),transparent 60%),
-      radial-gradient(700px 460px at 82% 20%,rgba(103,232,249,.08),transparent 62%),#06070b;
-    color:#f8fafc;font-family:"Inter","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif}
-  .box{max-width:420px;text-align:center}
-  .logo{font-size:15px;letter-spacing:.3em;color:#d9b36a;margin-bottom:18px}
-  h1{font-size:22px;font-weight:800;letter-spacing:.04em;margin-bottom:12px}
-  p{font-size:13px;line-height:1.8;color:#8b94a3}
-  a.btn{display:inline-block;margin-top:22px;padding:12px 22px;border-radius:12px;
-    background:linear-gradient(180deg,#f0d9a4,#d9b36a);color:#1b1608;text-decoration:none;
-    font-weight:700;font-size:14px}
-  .hint{margin-top:16px;font-size:11.5px;color:#5f6875;line-height:1.7}
+  html,body{min-height:100%}
+  body{background:
+      radial-gradient(900px 520px at 15% 0%,rgba(232,197,131,.13),transparent 60%),
+      radial-gradient(760px 520px at 88% 12%,rgba(103,232,249,.09),transparent 62%),
+      radial-gradient(900px 700px at 50% 110%,rgba(167,139,250,.08),transparent 60%),var(--ink);
+    color:var(--text);font-family:"Inter","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;padding:0 20px}
+  .wrap{max-width:1040px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+  header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 10px;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px}
+  .mark{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);
+    background:linear-gradient(145deg,rgba(232,197,131,.18),rgba(6,7,11,.4));
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px}
+  .brand b{display:block;font-size:15px;letter-spacing:.16em}
+  .brand small{display:block;margin-top:3px;font-size:9.5px;letter-spacing:.32em;color:var(--dim)}
+  .badge{font-size:11px;color:var(--dim);border:1px solid var(--line);border-radius:99px;padding:7px 12px}
+  main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:34px 0 40px}
+  .eyebrow{font-size:11px;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+  h1{font-size:clamp(30px,6vw,58px);line-height:1.18;letter-spacing:.01em;font-weight:800}
+  h1 span{background:linear-gradient(96deg,var(--gold) 0%,#f5e2bd 32%,var(--cyan) 68%,#b9a7f0 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin-top:18px;font-size:14.5px;line-height:1.9;color:#aab4c6;max-width:640px}
+  .cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;
+    border-radius:99px;background:linear-gradient(135deg,#f5e2bd,var(--gold) 55%,var(--gold2));
+    color:#151007;text-decoration:none;font-weight:800;font-size:14px;letter-spacing:.04em;
+    box-shadow:0 14px 40px -18px rgba(232,197,131,.75);transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 20px 48px -18px rgba(232,197,131,.9)}
+  #state{font-size:12px;color:var(--dim);line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:44px}
+  .cell{border:1px solid var(--line);border-radius:16px;padding:18px 16px;
+    background:linear-gradient(170deg,rgba(18,20,27,.9),rgba(8,9,13,.94))}
+  .cell em{display:block;font-style:normal;font-size:10.5px;letter-spacing:.28em;color:var(--gold);margin-bottom:10px}
+  .cell b{display:block;font-size:14px;margin-bottom:8px}
+  .cell p{font-size:12px;line-height:1.8;color:var(--dim)}
+  .how{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+  .how span{font-size:11.5px;color:#c8d0dc;border:1px solid var(--line);border-radius:99px;padding:6px 12px}
+  footer{padding:18px 0 26px;border-top:1px solid rgba(186,194,220,.09);display:flex;justify-content:space-between;
+    gap:12px;flex-wrap:wrap;font-size:11px;color:#5f6875;line-height:1.8}
+  @media(max-width:760px){ .grid{grid-template-columns:1fr} h1{font-size:clamp(28px,9vw,44px)} main{padding:20px 0 30px} }
 </style>
 </head>
 <body>
-  <div class="box">
-    <div class="logo">光幕 LUMEN ATELIER</div>
-    <h1>正在进入工作台…</h1>
-    <p id="tip">如果 3 秒内没有自动跳转，点下面的按钮。</p>
-    <a class="btn" id="go" href="#">进入工作台</a>
-    <div class="hint">登录仅限指定手机号 · 其他号码可以打开页面，但无法注册</div>
-  </div>
-  <script>
-    var baked = "https://jefferson-tvs-diane-mostly.trycloudflare.com";
-    var resolved = false;
-    function go(u) { if (resolved || !u) return; resolved = true; try { location.replace(u); } catch (e) {} }
-    function ping(u) {
-      return new Promise(function (resolve) {
-        if (!u) return resolve(false);
-        var done = false;
-        var t = setTimeout(function () { if (!done) { done = true; resolve(false); } }, 2200);
-        fetch(u + '/api/ping', { mode: 'no-cors', cache: 'no-store' })
-          .then(function () { if (!done) { done = true; clearTimeout(t); resolve(true); } })
-          .catch(function () { if (!done) { done = true; clearTimeout(t); resolve(false); } });
-      });
-    }
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="mark">光</div>
+      <div><b>光幕 LUMEN</b><small>ATELIER · PROMPT · GENERATE · DECONSTRUCT</small></div>
+    </div>
+    <div class="badge">短视频创作小工作台</div>
+  </header>
+  <main>
+    <div class="eyebrow">LUMEN ATELIER · 光幕工作台</div>
+    <h1>把一句想法，<br /><span>变成能发的短视频。</span></h1>
+    <p class="sub">不会写提示词、不会拆爆款、各平台语法又不一样——把这三件事，放进同一个工作台里解决。</p>
+    <div class="cta">
+      <a class="btn" id="enter" href="#">进入工作台</a>
+      <span id="state">正在检查线路…</span>
+    </div>
+    <div class="grid">
+      <article class="cell"><em>01 · PROMPT</em><b>提示词工坊</b><p>选场景、填产品，自动补齐光影、运镜和口播，一次生成 H3 / 可灵 / 豆包三平台可用的中文提示词。</p></article>
+      <article class="cell"><em>02 · GENERATE</em><b>视频生成</b><p>接上 H3 接口直接出片，自动保存到本地；每条生成按能力与画质实时显示预计扣费。</p></article>
+      <article class="cell"><em>03 · DECONSTRUCT</em><b>对标拆解</b><p>上传一条对标视频，自动抽帧、切镜、逐镜写提示词，学的是结构，不是抄画面。</p></article>
+    </div>
+    <div class="how"><span>不会写 → 帮你写</span><span>不会拆 → 帮你拆</span><span>三平台 → 一次出齐</span></div>
+  </main>
+  <footer>
+    <span>固定入口 · 仅限指定手机号登录 · 生成与拆解在本机运行</span>
+    <span id="footnote">GitHub Pages 静态页 · 实时线路自动检查</span>
+  </footer>
+</div>
+<script>
+  var baked = "https://jefferson-tvs-diane-mostly.trycloudflare.com";
+  var live = '';
+  function setEnter(u) {
+    var a = document.getElementById('enter');
+    if (!u) return;
+    a.href = u;
+    live = u;
+  }
+  setEnter(baked);
+  function reachable(u) {
+    return new Promise(function (resolve) {
+      if (!u) return resolve(false);
+      var done = false;
+      var t = setTimeout(function () { if (!done) { done = true; resolve(false); } }, 2400);
+      fetch(u + '/api/ping', { mode: 'no-cors', cache: 'no-store' })
+        .then(function () { if (!done) { done = true; clearTimeout(t); resolve(true); } })
+        .catch(function () { if (!done) { done = true; clearTimeout(t); resolve(false); } });
+    });
+  }
+  function showState(txt) { var el = document.getElementById('state'); if (el) el.textContent = txt; }
+  (async function () {
     var candidates = [baked];
-    document.getElementById('go').href = baked;
-    // 从 GitHub 取最新地址；CDN 可能缓存旧地址，所以拿到后还要实际测一下通不通
-    fetch('https://raw.githubusercontent.com/cmz189/my-website/gh-pages/h3/target.txt?t=' + Date.now(), { cache: 'no-store' })
-      .then(function (r) { return r.ok ? r.text() : ''; })
-      .then(function (txt) {
-        var u = String(txt || '').trim();
+    try {
+      var r = await fetch('https://raw.githubusercontent.com/cmz189/my-website/gh-pages/h3/target.txt?t=' + Date.now(), { cache: 'no-store' });
+      if (r.ok) {
+        var u = String((await r.text()) || '').trim();
         if (u.indexOf('https://') === 0 && u.indexOf('.trycloudflare.com') > -1 && candidates.indexOf(u) < 0) candidates.unshift(u);
-      })
-      .catch(function () {});
-    (async function () {
-      for (var round = 0; round < 12 && !resolved; round++) {
-        for (var i = 0; i < candidates.length && !resolved; i++) {
-          if (await ping(candidates[i])) { go(candidates[i]); return; }
-        }
-        if (!resolved) document.getElementById('tip').textContent = '正在恢复连接…（' + (round + 1) + '/12）';
-        await new Promise(function (r) { setTimeout(r, 1800); });
       }
-      if (!resolved) {
-        document.getElementById('go').textContent = '手动进入';
-        document.getElementById('tip').textContent = '自动进入失败：电脑可能刚开机或隧道正在恢复，点按钮重试或稍后刷新。';
+    } catch (e) { /* ignore */ }
+    for (var i = 0; i < candidates.length; i++) {
+      if (await reachable(candidates[i])) {
+        setEnter(candidates[i]);
+        showState('线路在线 · 点「进入工作台」开始');
+        return;
       }
-    })();
-  </script>
-  <noscript><a href="https://jefferson-tvs-diane-mostly.trycloudflare.com">进入工作台</a></noscript>
+    }
+    showState('线路恢复中：保持电脑开机，1–2 分钟后刷新本页再试');
+    document.getElementById('footnote').textContent = '静态页托管于 GitHub Pages · 工作台由本机运行时提供';
+  })();
+</script>
 </body>
 </html>
 <!-- target: https://jefferson-tvs-diane-mostly.trycloudflare.com -->
