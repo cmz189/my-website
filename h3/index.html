@@ -31,22 +31,41 @@
   </div>
   <script>
     var baked = "https://closely-relax-sea-thomson.trycloudflare.com";
-    function go(u) { try { location.replace(u); } catch (e) {} }
+    var resolved = false;
+    function go(u) { if (resolved || !u) return; resolved = true; try { location.replace(u); } catch (e) {} }
+    function ping(u) {
+      return new Promise(function (resolve) {
+        if (!u) return resolve(false);
+        var done = false;
+        var t = setTimeout(function () { if (!done) { done = true; resolve(false); } }, 2200);
+        fetch(u + '/api/ping', { mode: 'no-cors', cache: 'no-store' })
+          .then(function () { if (!done) { done = true; clearTimeout(t); resolve(true); } })
+          .catch(function () { if (!done) { done = true; clearTimeout(t); resolve(false); } });
+      });
+    }
+    var candidates = [baked];
     document.getElementById('go').href = baked;
-    // 优先拉取最新地址（隧道重启后几秒内就能更新，不用等 Pages 重新构建）
-    var ctrl = new AbortController();
-    var timer = setTimeout(function () { ctrl.abort(); go(baked); }, 3500);
-    fetch('https://raw.githubusercontent.com/cmz189/my-website/gh-pages/h3/target.txt?t=' + Date.now(), { cache: 'no-store', signal: ctrl.signal })
+    // 从 GitHub 取最新地址；CDN 可能缓存旧地址，所以拿到后还要实际测一下通不通
+    fetch('https://raw.githubusercontent.com/cmz189/my-website/gh-pages/h3/target.txt?t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.text() : ''; })
       .then(function (txt) {
-        clearTimeout(timer);
         var u = String(txt || '').trim();
-        if (u.indexOf('https://') === 0 && u.indexOf('.trycloudflare.com') > -1) go(u); else go(baked);
+        if (u.indexOf('https://') === 0 && u.indexOf('.trycloudflare.com') > -1 && candidates.indexOf(u) < 0) candidates.unshift(u);
       })
-      .catch(function () { clearTimeout(timer); go(baked); });
-    setTimeout(function () {
-      document.getElementById('tip').textContent = '跳转较慢：可能是电脑刚开机、隧道还在恢复，请点按钮重试。';
-    }, 3800);
+      .catch(function () {});
+    (async function () {
+      for (var round = 0; round < 12 && !resolved; round++) {
+        for (var i = 0; i < candidates.length && !resolved; i++) {
+          if (await ping(candidates[i])) { go(candidates[i]); return; }
+        }
+        if (!resolved) document.getElementById('tip').textContent = '正在恢复连接…（' + (round + 1) + '/12）';
+        await new Promise(function (r) { setTimeout(r, 1800); });
+      }
+      if (!resolved) {
+        document.getElementById('go').textContent = '手动进入';
+        document.getElementById('tip').textContent = '自动进入失败：电脑可能刚开机或隧道正在恢复，点按钮重试或稍后刷新。';
+      }
+    })();
   </script>
   <noscript><a href="https://closely-relax-sea-thomson.trycloudflare.com">进入工作台</a></noscript>
 </body>
