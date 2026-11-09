@@ -1,1 +1,1 @@
-https://schemes-pendant-forty-organ.trycloudflare.com
+https://api.trycloudflare.com
