@@ -1,1 +1,1 @@
-https://agenda-military-swaziland-acids.trycloudflare.com
+https://api.trycloudflare.com
