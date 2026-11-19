@@ -1,1 +1,1 @@
-https://corporate-signals-butler-titles.trycloudflare.com
+https://api.trycloudflare.com
