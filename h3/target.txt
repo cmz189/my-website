@@ -1,1 +1,1 @@
-https://getting-actor-assure-exceptions.trycloudflare.com
+https://api.trycloudflare.com
