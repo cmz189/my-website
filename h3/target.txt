@@ -1,1 +1,1 @@
-https://extended-rings-move-angeles.trycloudflare.com
+https://api.trycloudflare.com
